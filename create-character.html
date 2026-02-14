@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Create Character</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h2>Create Character</h2>
+
+<input id="name" placeholder="Full Name">
+<input id="dob" placeholder="DOB">
+<input id="address" placeholder="Address">
+<br>
+<button onclick="saveCharacter()">Save</button>
+
+<script>
+function saveCharacter() {
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+
+  const character = {
+    name: name.value,
+    dob: dob.value,
+    address: address.value,
+    owner: user.username
+  };
+
+  let characters = JSON.parse(localStorage.getItem("characters")) || [];
+  characters.push(character);
+
+  localStorage.setItem("characters", JSON.stringify(characters));
+
+  alert("Character Saved");
+}
+</script>
+
+</body>
+</html>
