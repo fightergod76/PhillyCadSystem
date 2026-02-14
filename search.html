@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Search</title>
+<link rel="stylesheet" href="style.css">
+<script src="auth.js"></script>
+</head>
+<body onload="checkOfficerAccess()">
+
+<h2>Search Character</h2>
+
+<input id="searchName" placeholder="Enter Name">
+<button onclick="search()">Search</button>
+
+<div id="results"></div>
+
+<script>
+function search() {
+  const searchName = document.getElementById("searchName").value;
+  const characters = JSON.parse(localStorage.getItem("characters")) || [];
+
+  const result = characters.find(c => c.name === searchName);
+
+  if (!result) {
+    document.getElementById("results").innerHTML = "No record found.";
+    return;
+  }
+
+  document.getElementById("results").innerHTML = `
+  Name: ${result.name}<br>
+  DOB: ${result.dob}<br>
+  Address: ${result.address}
+  `;
+}
+</script>
+
+</body>
+</html>
