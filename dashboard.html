@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard</title>
+<link rel="stylesheet" href="style.css">
+<script src="auth.js"></script>
+</head>
+<body>
+
+<h2>Dashboard</h2>
+
+<div id="options"></div>
+
+<script>
+const user = JSON.parse(localStorage.getItem("currentUser"));
+
+if (!user) {
+  window.location.href = "login.html";
+}
+
+document.getElementById("options").innerHTML = `
+<p>Welcome ${user.username}</p>
+<a href="create-character.html">Create Character</a><br>
+${user.role === "officer" ? '<a href="officer-dashboard.html">Officer Panel</a>' : ''}
+`;
+</script>
+
+</body>
+</html>
