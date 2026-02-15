@@ -1,14 +1,14 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background-color: #0c1424;
-  color: #e0e6f1;
+  background-color: #0b1220;
+  color: #e2e8f0;
 }
 
 .sidebar {
-  width: 230px;
+  width: 240px;
   height: 100vh;
-  background-color: #111c33;
+  background: #111827;
   position: fixed;
   left: 0;
   top: 0;
@@ -17,7 +17,8 @@ body {
 
 .sidebar h2 {
   text-align: center;
-  color: #4da6ff;
+  color: #3b82f6;
+  margin-bottom: 20px;
 }
 
 .sidebar a {
@@ -29,48 +30,52 @@ body {
 }
 
 .sidebar a:hover {
-  background-color: #1e2d4d;
+  background: #1f2937;
 }
 
 .main {
-  margin-left: 230px;
+  margin-left: 240px;
   padding: 30px;
 }
 
 .card {
-  background-color: #111c33;
+  background: #111827;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-bottom: 20px;
 }
 
-input, button {
-  padding: 10px;
+input, select {
+  padding: 8px;
   margin: 5px;
   border-radius: 5px;
   border: none;
 }
 
 button {
-  background-color: #2563eb;
-  color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: none;
   cursor: pointer;
+  background: #2563eb;
+  color: white;
 }
 
 button:hover {
-  background-color: #3b82f6;
+  background: #3b82f6;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 10px;
 }
 
 th, td {
   padding: 10px;
-  border-bottom: 1px solid #1e293b;
+  border-bottom: 1px solid #1f2937;
 }
 
 th {
-  background-color: #1e293b;
+  background: #1e293b;
 }
