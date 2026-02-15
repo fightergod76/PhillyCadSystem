@@ -4,15 +4,14 @@
 <title>Search Records</title>
 <link rel="stylesheet" href="style.css">
 <script src="auth.js"></script>
+<script src="CAD.js"></script>
 </head>
-
-<body onload="checkOfficerAccess()">
+<body onload="requireOfficer()">
 
 <div class="sidebar">
   <h2>Philly CAD</h2>
-  <a href="officer-dashboard.html">Dashboard</a>
+  <a href="dashboard.html">Home</a>
   <a href="search.html">Search Records</a>
-  <a href="dashboard.html">User Dashboard</a>
 </div>
 
 <div class="main">
@@ -20,77 +19,11 @@
 
   <div class="card">
     <input id="searchName" placeholder="Enter Full Name">
-    <button onclick="search()">Search</button>
+    <button onclick="searchCharacter()">Search</button>
   </div>
 
-  <div class="card" id="results"></div>
+  <div id="results"></div>
 </div>
-
-<script>
-
-function search() {
-  const searchName = document.getElementById("searchName").value.toLowerCase();
-  const characters = JSON.parse(localStorage.getItem("characters")) || [];
-
-  const result = characters.find(c => c.name.toLowerCase() === searchName);
-
-  if (!result) {
-    document.getElementById("results").innerHTML = "No record found.";
-    return;
-  }
-
-  let citationHTML = "";
-
-  if (!result.citations || result.citations.length === 0) {
-    citationHTML = "<p>No citations on record.</p>";
-  } else {
-    citationHTML = "<ul>";
-    result.citations.forEach(c => {
-      citationHTML += `<li>${c.date} | ${c.offense} | $${c.fine}</li>`;
-    });
-    citationHTML += "</ul>";
-  }
-
-  document.getElementById("results").innerHTML = `
-    <h2>${result.name}</h2>
-    <p>DOB: ${result.dob}</p>
-    <p>Address: ${result.address}</p>
-
-    <h3>Citations</h3>
-    ${citationHTML}
-
-    <h3>Add Citation</h3>
-    <input id="offense" placeholder="Offense">
-    <input id="fine" placeholder="Fine Amount">
-    <button onclick="addCitation(${result.id})">Add Citation</button>
-  `;
-}
-
-function addCitation(characterId) {
-  let characters = JSON.parse(localStorage.getItem("characters")) || [];
-  const offense = document.getElementById("offense").value;
-  const fine = document.getElementById("fine").value;
-
-  const character = characters.find(c => c.id === characterId);
-
-  if (!character) return;
-
-  if (!character.citations) character.citations = [];
-
-  const citation = {
-    date: new Date().toLocaleDateString(),
-    offense: offense,
-    fine: fine
-  };
-
-  character.citations.push(citation);
-
-  localStorage.setItem("characters", JSON.stringify(characters));
-
-  search();
-}
-
-</script>
 
 </body>
 </html>
