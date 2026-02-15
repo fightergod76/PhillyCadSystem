@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Search</title>
+<title>Search Records</title>
 <link rel="stylesheet" href="style.css">
 <script src="auth.js"></script>
 </head>
+
 <body onload="checkOfficerAccess()">
 
-<h2>Officer Search Panel</h2>
+<div class="sidebar">
+  <h2>Philly CAD</h2>
+  <a href="officer-dashboard.html">Dashboard</a>
+  <a href="search.html">Search Records</a>
+  <a href="dashboard.html">User Dashboard</a>
+</div>
 
-<input id="searchName" placeholder="Enter Name">
-<button onclick="search()">Search</button>
+<div class="main">
+  <h1>Search Records</h1>
 
-<div id="results"></div>
+  <div class="card">
+    <input id="searchName" placeholder="Enter Full Name">
+    <button onclick="search()">Search</button>
+  </div>
+
+  <div class="card" id="results"></div>
+</div>
 
 <script>
 
@@ -27,34 +39,30 @@ function search() {
     return;
   }
 
-  displayRecord(result);
-}
-
-function displayRecord(character) {
   let citationHTML = "";
 
-  if (character.citations.length === 0) {
+  if (!result.citations || result.citations.length === 0) {
     citationHTML = "<p>No citations on record.</p>";
   } else {
     citationHTML = "<ul>";
-    character.citations.forEach(c => {
-      citationHTML += `<li>${c.date} - ${c.offense} - $${c.fine}</li>`;
+    result.citations.forEach(c => {
+      citationHTML += `<li>${c.date} | ${c.offense} | $${c.fine}</li>`;
     });
     citationHTML += "</ul>";
   }
 
   document.getElementById("results").innerHTML = `
-    <h3>${character.name}</h3>
-    DOB: ${character.dob}<br>
-    Address: ${character.address}<br><br>
+    <h2>${result.name}</h2>
+    <p>DOB: ${result.dob}</p>
+    <p>Address: ${result.address}</p>
 
-    <h4>Citations</h4>
+    <h3>Citations</h3>
     ${citationHTML}
 
-    <h4>Add Citation</h4>
+    <h3>Add Citation</h3>
     <input id="offense" placeholder="Offense">
     <input id="fine" placeholder="Fine Amount">
-    <button onclick="addCitation(${character.id})">Add Citation</button>
+    <button onclick="addCitation(${result.id})">Add Citation</button>
   `;
 }
 
@@ -67,6 +75,8 @@ function addCitation(characterId) {
 
   if (!character) return;
 
+  if (!character.citations) character.citations = [];
+
   const citation = {
     date: new Date().toLocaleDateString(),
     offense: offense,
@@ -77,8 +87,7 @@ function addCitation(characterId) {
 
   localStorage.setItem("characters", JSON.stringify(characters));
 
-  alert("Citation Added");
-  displayRecord(character);
+  search();
 }
 
 </script>
