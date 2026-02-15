@@ -1,4 +1,3 @@
-// Register
 function register() {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
@@ -10,49 +9,32 @@ function register() {
   }
 
   let role = "civilian";
-
   if (code === "PhillyRPV3Police") {
     role = "officer";
   }
 
-  const user = {
-    username: username,
-    password: password,
-    role: role
-  };
+  const user = { username, password, role };
 
   localStorage.setItem("user_" + username, JSON.stringify(user));
-  alert("Registered successfully");
+  alert("Registered");
 }
 
-// Login
 function login() {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
   const stored = localStorage.getItem("user_" + username);
-
-  if (!stored) {
-    alert("User not found");
-    return;
-  }
+  if (!stored) return alert("User not found");
 
   const user = JSON.parse(stored);
-
-  if (user.password !== password) {
-    alert("Wrong password");
-    return;
-  }
+  if (user.password !== password) return alert("Wrong password");
 
   localStorage.setItem("currentUser", JSON.stringify(user));
-
   window.location.href = "dashboard.html";
 }
 
-// Protect officer pages
-function checkOfficerAccess() {
+function requireOfficer() {
   const user = JSON.parse(localStorage.getItem("currentUser"));
-
   if (!user || user.role !== "officer") {
     alert("Access Denied");
     window.location.href = "dashboard.html";
