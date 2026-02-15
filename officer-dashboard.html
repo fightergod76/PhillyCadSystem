@@ -1,33 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Officer CAD</title>
+<title>Officer Panel</title>
 <link rel="stylesheet" href="style.css">
 <script src="auth.js"></script>
 </head>
-
-<body onload="checkOfficerAccess()">
+<body onload="requireOfficer()">
 
 <div class="sidebar">
   <h2>Philly CAD</h2>
-  <a href="officer-dashboard.html">Dashboard</a>
+  <a href="dashboard.html">Home</a>
   <a href="search.html">Search Records</a>
-  <a href="dashboard.html">User Dashboard</a>
 </div>
 
 <div class="main">
-  <h1>Officer Dashboard</h1>
-
-  <div class="card">
-    <h3>Quick Stats</h3>
-    <p>Total Characters: <span id="totalChars">0</span></p>
-  </div>
+  <h1>Officer Panel</h1>
+  <p>Access restricted to authorized personnel.</p>
 </div>
-
-<script>
-const characters = JSON.parse(localStorage.getItem("characters")) || [];
-document.getElementById("totalChars").innerText = characters.length;
-</script>
 
 </body>
 </html>
