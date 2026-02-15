@@ -5,25 +5,20 @@
 <link rel="stylesheet" href="style.css">
 <script src="auth.js"></script>
 </head>
-<body>
+<body onload="requireLogin()">
 
-<h2>Dashboard</h2>
+<div class="sidebar">
+  <h2>Philly CAD</h2>
+  <a href="dashboard.html">Home</a>
+  <a href="create-character.html">Create Character</a>
+  <a href="search.html">Search Records</a>
+  <a href="officer-dashboard.html">Officer Panel</a>
+</div>
 
-<div id="options"></div>
-
-<script>
-const user = JSON.parse(localStorage.getItem("currentUser"));
-
-if (!user) {
-  window.location.href = "login.html";
-}
-
-document.getElementById("options").innerHTML = `
-<p>Welcome ${user.username}</p>
-<a href="create-character.html">Create Character</a><br>
-${user.role === "officer" ? '<a href="officer-dashboard.html">Officer Panel</a>' : ''}
-`;
-</script>
+<div class="main">
+  <h1>User Dashboard</h1>
+  <p>Welcome to the CAD System</p>
+</div>
 
 </body>
 </html>
