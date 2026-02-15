@@ -1,28 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Create Character</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<h2>Create Character</h2>
-
-<input id="name" placeholder="Full Name">
-<input id="dob" placeholder="DOB">
-<input id="address" placeholder="Address">
-<br>
-<button onclick="saveCharacter()">Save</button>
-
 <script>
 function saveCharacter() {
   const user = JSON.parse(localStorage.getItem("currentUser"));
 
+  if (!user) {
+    alert("Not logged in");
+    return;
+  }
+
   const character = {
-    name: name.value,
-    dob: dob.value,
-    address: address.value,
-    owner: user.username
+    id: Date.now(), // unique ID
+    name: document.getElementById("name").value,
+    dob: document.getElementById("dob").value,
+    address: document.getElementById("address").value,
+    owner: user.username,
+    citations: []
   };
 
   let characters = JSON.parse(localStorage.getItem("characters")) || [];
@@ -33,6 +24,3 @@ function saveCharacter() {
   alert("Character Saved");
 }
 </script>
-
-</body>
-</html>
