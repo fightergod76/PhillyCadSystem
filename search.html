@@ -7,7 +7,7 @@
 </head>
 <body onload="checkOfficerAccess()">
 
-<h2>Search Character</h2>
+<h2>Officer Search Panel</h2>
 
 <input id="searchName" placeholder="Enter Name">
 <button onclick="search()">Search</button>
@@ -15,23 +15,72 @@
 <div id="results"></div>
 
 <script>
+
 function search() {
-  const searchName = document.getElementById("searchName").value;
+  const searchName = document.getElementById("searchName").value.toLowerCase();
   const characters = JSON.parse(localStorage.getItem("characters")) || [];
 
-  const result = characters.find(c => c.name === searchName);
+  const result = characters.find(c => c.name.toLowerCase() === searchName);
 
   if (!result) {
     document.getElementById("results").innerHTML = "No record found.";
     return;
   }
 
+  displayRecord(result);
+}
+
+function displayRecord(character) {
+  let citationHTML = "";
+
+  if (character.citations.length === 0) {
+    citationHTML = "<p>No citations on record.</p>";
+  } else {
+    citationHTML = "<ul>";
+    character.citations.forEach(c => {
+      citationHTML += `<li>${c.date} - ${c.offense} - $${c.fine}</li>`;
+    });
+    citationHTML += "</ul>";
+  }
+
   document.getElementById("results").innerHTML = `
-  Name: ${result.name}<br>
-  DOB: ${result.dob}<br>
-  Address: ${result.address}
+    <h3>${character.name}</h3>
+    DOB: ${character.dob}<br>
+    Address: ${character.address}<br><br>
+
+    <h4>Citations</h4>
+    ${citationHTML}
+
+    <h4>Add Citation</h4>
+    <input id="offense" placeholder="Offense">
+    <input id="fine" placeholder="Fine Amount">
+    <button onclick="addCitation(${character.id})">Add Citation</button>
   `;
 }
+
+function addCitation(characterId) {
+  let characters = JSON.parse(localStorage.getItem("characters")) || [];
+  const offense = document.getElementById("offense").value;
+  const fine = document.getElementById("fine").value;
+
+  const character = characters.find(c => c.id === characterId);
+
+  if (!character) return;
+
+  const citation = {
+    date: new Date().toLocaleDateString(),
+    offense: offense,
+    fine: fine
+  };
+
+  character.citations.push(citation);
+
+  localStorage.setItem("characters", JSON.stringify(characters));
+
+  alert("Citation Added");
+  displayRecord(character);
+}
+
 </script>
 
 </body>
