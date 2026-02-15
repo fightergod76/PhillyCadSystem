@@ -1,12 +1,62 @@
 body {
-  background-color: #0f172a;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0b1220;
   color: white;
-  font-family: Arial;
+}
+
+.sidebar {
+  width: 220px;
+  height: 100vh;
+  background-color: #111a2e;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding-top: 20px;
+}
+
+.sidebar h2 {
   text-align: center;
-  padding: 50px;
+  color: #4da6ff;
+}
+
+.sidebar a {
+  display: block;
+  padding: 15px;
+  text-decoration: none;
+  color: white;
+  transition: 0.2s;
+}
+
+.sidebar a:hover {
+  background-color: #1e2b4a;
+}
+
+.main {
+  margin-left: 220px;
+  padding: 30px;
+}
+
+.card {
+  background-color: #111a2e;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
 }
 
 input, button {
   padding: 10px;
   margin: 5px;
+  border-radius: 5px;
+  border: none;
+}
+
+button {
+  background-color: #2a4d8f;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #3b6cd4;
 }
