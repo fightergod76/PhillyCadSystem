@@ -1,14 +1,14 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background-color: #0b1220;
-  color: white;
+  background-color: #0c1424;
+  color: #e0e6f1;
 }
 
 .sidebar {
-  width: 220px;
+  width: 230px;
   height: 100vh;
-  background-color: #111a2e;
+  background-color: #111c33;
   position: fixed;
   left: 0;
   top: 0;
@@ -24,21 +24,21 @@ body {
   display: block;
   padding: 15px;
   text-decoration: none;
-  color: white;
+  color: #cbd5e1;
   transition: 0.2s;
 }
 
 .sidebar a:hover {
-  background-color: #1e2b4a;
+  background-color: #1e2d4d;
 }
 
 .main {
-  margin-left: 220px;
+  margin-left: 230px;
   padding: 30px;
 }
 
 .card {
-  background-color: #111a2e;
+  background-color: #111c33;
   padding: 20px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -52,11 +52,25 @@ input, button {
 }
 
 button {
-  background-color: #2a4d8f;
+  background-color: #2563eb;
   color: white;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #3b6cd4;
+  background-color: #3b82f6;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #1e293b;
+}
+
+th {
+  background-color: #1e293b;
 }
